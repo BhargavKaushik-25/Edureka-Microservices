@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy built JAR file
-COPY target/booking-ms-1.0.0.jar app.jar
+COPY target/inventory-ms-0.0.1-SNAPSHOT.jar
 
 # Expose port (check your application.properties port for booking-ms)
 EXPOSE 9192

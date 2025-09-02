@@ -1,0 +1,29 @@
+package com.bus.booking_ms.messaging;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MessagingTestRunner implements ApplicationRunner {
+
+    private final JmsTemplate jmsTemplate;
+    private final Logger log = LoggerFactory.getLogger(MessagingTestRunner.class);
+
+    public MessagingTestRunner(JmsTemplate jmsTemplate) {
+        this.jmsTemplate = jmsTemplate;
+    }
+
+    @Override
+    public void run(ApplicationArguments args) {
+        try {
+            jmsTemplate.convertAndSend("booking.test", "ping from booking-ms");
+            log.info("Sent test JMS message to destination 'booking.test'");
+        } catch (Exception ex) {
+            log.error("Failed to send test JMS message", ex);
+        }
+    }
+}
