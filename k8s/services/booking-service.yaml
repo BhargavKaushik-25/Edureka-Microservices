@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: booking-service
+  labels:
+    app: booking
+spec:
+  selector:
+    app: booking
+  ports:
+    - protocol: TCP
+      port: 8080        # The port other services will use inside the cluster
+      targetPort: 8080  # The port the container is listening on
+  type: ClusterIP       # Internal cluster service
